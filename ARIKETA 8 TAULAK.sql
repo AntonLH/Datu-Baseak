@@ -1,72 +1,65 @@
 CREATE TABLE PINAKOTEKA
-{
-	IzenaPin			VARCHAR2(20),
-	Helbidea			VARCHAR2(30),
-	HiriaPin			VARCHAR2(30),
-	MetroKoadroak		NUMBER(3),
-	PRIMARY KEY IzenaPin
-}
+(
+	IzenaPin		 	VARCHAR2(20) PRIMARY KEY,
+	Helbidea		 	VARCHAR2(30),
+	HiriaPin		 	VARCHAR2(30),
+	MetroKoadroak	 	NUMBER(3)
+);
 CREATE TABLE PINTOREA
-{
-	KodPintorea		NUMBER(10),
-	IzenaPintorea	VARCHAR2(30),
-	HiriaPintorea	VARCHAR2(20),
-	Nazioa			VARCHAR2(20),
-	JaiotzaData		DATE,
-	HeriotzaData	DATE,
-	PRIMARY KEY KodPintorea
-}
+(
+	KodPintorea		 NUMBER(10) PRIMARY KEY,
+	IzenaPintorea 	VARCHAR2(30),
+	HiriaPintorea 	VARCHAR2(20),
+	Nazioa		 	VARCHAR2(20),
+	JaiotzaData	 	DATE,
+	HeriotzaData 	DATE
+);
 CREATE TABLE KOADROA
-{
-	KodKoadroa		NUMBER(10),
-	Izenburua		VARCHAR2(20),
-	Teknika			VARCHAR2(20),
-	Neurriak		NUMBER(9),
-	SortzeData		DATE,
-	IzenaPin		VARCHAR2(30),
-	KodPintorea		NUMBER(10),
+(
+	KodKoadroa	 	NUMBER(10),
+	Izenburua	 	VARCHAR2(20),
+	Teknika		 	VARCHAR2(20),
+	Neurriak	 	NUMBER(9),
+	SortzeData	 	DATE,
+	IzenaPin	 	VARCHAR2(30),
+	KodPintorea	 	NUMBER(10),
 	CONSTRAINT PK_KOADROA PRIMARY KEY (KodKoadroa, KodPintorea),
 	CONSTRAINT PK_KOADROA_Izena FOREIGN KEY (IzenaPin) REFERENCES PINAKOTEKA ON DELETE CASCADE,
 	CONSTRAINT PK_KOADROA_Pintorea FOREIGN KEY (KodPintorea) REFERENCES PINTOREA ON DELETE CASCADE
-}
+);
 CREATE TABLE ESKOLA
-{
-	IzenaEskola		VARCHAR2(30),
-	SortzeDataEsk	DATE,
-	Herrialdea		VARCHAR2(20),
-	PRIMARY KEY IzenaEskola
-}
+(
+	IzenaEskola	 	VARCHAR2(30) PRIMARY KEY,
+	SortzeDataEsk 	DATE,
+	Herrialdea	 	VARCHAR2(20)
+);
 CREATE TABLE MEZENAS
-{
-	IzenaMez		VARCHAR2(30),
-	Jaioterria		VARCHAR2(20),
-	Nazionalitatea	VARCHAR2(20),
-	JaiotzaDataMez	DATE,
-	HeriotzaDataMez	DATE,
-	PRIMARY KEY IzenaMez
-}
+(
+	IzenaMez	 	VARCHAR2(30) PRIMARY KEY,
+	Jaioterria	 	VARCHAR2(20),
+	Nazionalitatea 	VARCHAR2(20),
+	JaiotzaDataMez 	DATE,
+	HeriotzaDataMez DATE
+);
 CREATE TABLE EUKI
-{
-	KodPintorea		NUMBER(10),
-	IzenaMez		VARCHAR2(30),
-	Harremana		VARCHAR2(20),
+(
+	KodPintorea	 	NUMBER(10),
+	IzenaMez	 	VARCHAR2(30),
+	Harremana	 	VARCHAR2(20),
 	CONSTRAINT PK_EUKI_Izena FOREIGN KEY (IzenaMez) REFERENCES MEZENAS ON DELETE CASCADE,
 	CONSTRAINT PK_EUKI_Pintorea FOREIGN KEY (KodPintorea) REFERENCES PINTOREA ON DELETE CASCADE
-}
-}
+);
 CREATE TABLE MAISUA
-{
-	KodPintorea		NUMBER(10),
-	KodMaisua		NUMBER(10),
-	CONSTRAINT PK_MAISUA_Pintorea FOREIGN KEY (KodPintorea) REFERENCES PINTOREA ON DELETE CASCADE
+(
+	KodPintorea	 	NUMBER(10),
+	KodMaisua	 	NUMBER(10) PRIMARY KEY,
+	CONSTRAINT PK_MAISUA_Pintorea FOREIGN KEY (KodPintorea) REFERENCES PINTOREA ON DELETE CASCADE,
 	CONSTRAINT PK_MAISUA_Maisua FOREIGN KEY (KodMaisua) REFERENCES MAISUA ON DELETE CASCADE
-
-}
+);
 CREATE TABLE PINTORE_ESKOLA
-{
-	KodPintorea		NUMBER(10),
-	IzenaEskola		VARCHAR2(30),
-	CONSTRAINT PK_ESKOLA_Pintorea FOREIGN KEY (KodPintorea) REFERENCES PINTOREA ON DELETE CASCADE
+(
+	KodPintorea	 	NUMBER(10),
+	IzenaEskola	 	VARCHAR2(30),
+	CONSTRAINT PK_ESKOLA_Pintorea FOREIGN KEY (KodPintorea) REFERENCES PINTOREA ON DELETE CASCADE,
 	CONSTRAINT PK_ESKOLA_Izena FOREIGN KEY (IzenaEskola) REFERENCES ESKOLA ON DELETE CASCADE
-
-}
+);

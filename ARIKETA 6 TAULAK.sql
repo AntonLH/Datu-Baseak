@@ -1,18 +1,16 @@
 CREATE TABLE PATROIA
-{
-	NAN					VARCHAR2(9),
-	Datupertsonalak		VARCHAR2(20),
-	Jaiotzadata			DATE,
-	Jaiotzatokia		VARCHAR2(20),
-	PRIMARY KEY NAN
-}
+(
+	NAN					 VARCHAR2(9) PRIMARY KEY,
+	Datupertsonalak		 VARCHAR2(20),
+	Jaiotzadata			 DATE,
+	Jaiotzatokia		 VARCHAR2(20)
+);
 CREATE TABLE TRAINERA
-{
-	KodTrainera			NUMBER(10),
-	Izena				VARCHAR2(20),
-	Kluba				VARCHAR2(20),
-	Erositakourtea		NUMBER(4),
-	NAN					VARCHAR2(9),	
-	PRIMARY KEY KodTrainera,
+(
+	KodTrainera			 NUMBER(10) PRIMARY KEY,
+	Izena				 VARCHAR2(20),
+	Kluba				 VARCHAR2(20),
+	Erositakourtea		 NUMBER(4),
+	NAN					 VARCHAR2(9),	
 	CONSTRAINT FK_TRAINERA FOREIGN KEY (NAN) REFERENCES PATROIA ON DELETE CASCADE
-}
+);
