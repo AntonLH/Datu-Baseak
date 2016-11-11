@@ -26,14 +26,7 @@ Tokia Varchar(25)
 CREATE TABLE Parte_hartu(
 NAN Varchar2(10),
 KodHitzaldia Number(5),
-CONSTRAINT PK_parte_hartu
-PRIMARY KEY (NAN, KodHitzaldia),
-CONSTRAINT FK_PH_Irakas
-FOREIGN KEY (NAN)
-REFERENCES Irakaslea (NAN) 
-ON DELETE CASCADE,
-CONSTRAINT FK_PH_Hitz
-FOREIGN KEY (KodHitzaldia)
-REFERENCES Hitzaldia (KodHitzaldia)
-ON DELETE CASCADE
+CONSTRAINT PK_parte_hartu PRIMARY KEY (NAN, KodHitzaldia),
+CONSTRAINT FK_PH_Irakas FOREIGN KEY (NAN) REFERENCES Irakaslea (NAN) ON DELETE CASCADE,
+CONSTRAINT FK_PH_Hitz FOREIGN KEY (KodHitzaldia) REFERENCES Hitzaldia (KodHitzaldia) ON DELETE CASCADE
 );
